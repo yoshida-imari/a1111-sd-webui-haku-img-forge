@@ -1,5 +1,5 @@
-# a1111-sd-webui-haku-img
-An Image utils extension for A1111's sd-webui
+# A1111's sd-webui Image Utils (Forge Fork)
+This is a Forge-compatible fork of [KohakuBlueleaf's a1111-sd-webui-haku-img](https://github.com/KohakuBlueleaf/a1111-sd-webui-haku-img).
 
 Features:
 * blending (support 17 mode)
