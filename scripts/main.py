@@ -453,9 +453,7 @@ def add_tab():
         all_blend_set += all_alphas + all_mask_blur + all_mask_str + all_mode
         all_blend_input = all_blend_set + all_layers
         for component in all_blend_set:
-            _release_if_possible(
-                component, blend.run(layers), all_blend_input, image_out
-            )
+            _release_if_possible(component, blend.run(layers), all_blend_input, image_out)
         expand_btn.click(blend.run(layers), all_blend_input, image_out)
 
         # blur
@@ -632,10 +630,30 @@ def add_tab():
 
 
 def _release_if_possible(component, *args, **kwargs):
-    if isinstance(component, gr.events.Releaseable):
+    """
+    Handle component event binding for both old and new Gradio versions.
+    Supports both the legacy Releaseable interface and the new event system.
+    
+    Args:
+        component: Gradio component to bind events to
+        *args: Arguments to pass to the event handler
+        **kwargs: Keyword arguments to pass to the event handler
+    """
+    # Check if component has a release method directly
+    if hasattr(component, 'release'):
         component.release(*args, **kwargs)
+    # Check if component has select event (for newer Gradio versions)
+    elif hasattr(component, 'select'):
+        component.select(*args, **kwargs)
+    # Check if component has submit event
+    elif hasattr(component, 'submit'):
+        component.submit(*args, **kwargs)
+    # Fallback to change event
     else:
         component.change(*args, **kwargs)
+        
+    # Return the component to allow for method chaining
+    return component
 
 
 def on_ui_settings():
