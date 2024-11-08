@@ -1,4 +1,4 @@
-# A1111's sd-webui Image Utils (Forge Fork)
+# a1111-sd-webui-haku-img (Forge Fork)
 This is a Forge-compatible fork of [KohakuBlueleaf's a1111-sd-webui-haku-img](https://github.com/KohakuBlueleaf/a1111-sd-webui-haku-img).
 
 Features:
